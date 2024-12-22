@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 buildscript {
     repositories {
-        jcenter()
+        maven { setUrl("https://maven.aliyun.com/repository/jcenter") }
     }
     dependencies {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'

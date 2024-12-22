@@ -3,6 +3,11 @@ apply from: "config.gradle"
 
 buildscript {
     repositories {
+        maven {
+            setUrl("http://10.0.10.130:8082/repository/maven-public/")
+            allowInsecureProtocol = true
+        }
+        maven { setUrl("https://maven.aliyun.com/repository/jcenter") }
         google()
         mavenCentral()
         maven {
@@ -21,6 +26,11 @@ buildscript {
 allprojects {
 
     repositories {
+        maven {
+            setUrl("http://10.0.10.130:8082/repository/maven-public/")
+            allowInsecureProtocol = true
+        }
+        maven { setUrl("https://maven.aliyun.com/repository/jcenter") }
         google()
         mavenCentral()
         maven {
