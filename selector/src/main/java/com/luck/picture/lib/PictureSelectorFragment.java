@@ -7,6 +7,7 @@ import android.os.SystemClock;
 import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowInsets;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
@@ -16,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
@@ -388,7 +392,7 @@ public class PictureSelectorFragment extends PictureCommonFragment
         addAlbumPopWindowAction();
     }
 
-    private void recoverSaveInstanceData(){
+    private void recoverSaveInstanceData() {
         mAdapter.setDisplayCamera(isDisplayCamera);
         setEnterAnimationDuration(0);
         if (selectorConfig.isOnlySandboxDir) {
@@ -481,7 +485,7 @@ public class PictureSelectorFragment extends PictureCommonFragment
 
     @Override
     public void handlePermissionSettingResult(String[] permissions) {
-        if (permissions == null){
+        if (permissions == null) {
             return;
         }
         onPermissionExplainEvent(false, null);
@@ -602,6 +606,16 @@ public class PictureSelectorFragment extends PictureCommonFragment
             }
         });
         bottomNarBar.setSelectedChange();
+        ViewCompat.setOnApplyWindowInsetsListener(bottomNarBar, (v, insets) -> {
+            Insets insetsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(
+                    insetsInsets.left,
+                    insetsInsets.top,
+                    insetsInsets.right,
+                    insetsInsets.bottom
+            );
+            return WindowInsetsCompat.CONSUMED;
+        });
     }
 
 
